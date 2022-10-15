@@ -4,6 +4,7 @@ import sys
 import pygame
 
 from settings import Settings 
+from ship import Ship
 
 class AlienInvasion:
     """管理游戏资源"""
@@ -14,6 +15,7 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((self.settings.screen_height,self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
 
+        self.ship = Ship(self)
         # 设置背景颜色
         #self.bg_color = {230,230,230}
 
@@ -25,7 +27,9 @@ class AlienInvasion:
                     sys.exit()
 
         # 重绘屏幕
+
         self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
         pygame.display.flip()
 
 
