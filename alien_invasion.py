@@ -22,15 +22,35 @@ class AlienInvasion:
     def run_game(self):
         while True:
         # 监视键盘和鼠标事件
-            for event in pygame.event.get():
+            self._chek_events()
+
+            self.ship.update()
+        # 重绘屏幕
+            self._update_screen()
+
+            
+    
+    def _chek_events(self):
+        for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = True
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = True
+                elif event.type == pygame.KEYUP:
+                    if event.type == pygame.K_RIGHT:
+                        self.ship.moving_right = False
+                    elif event.type == pygame.K_LEFT:
+                        self.ship.moving_left = False
 
-        # 重绘屏幕
-
+    def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         pygame.display.flip()
+
+
 
 
 if __name__ == '__main__':
